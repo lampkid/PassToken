@@ -118,8 +118,8 @@ class PassToken extends Component {
                 <Text style={styles.desc}>不再担心网站被脱库、撞库</Text>
             </View>
         </View>
-        <View style={styles.tokenInput}>
-          <TextInput style={{height: 40}}
+        <View style={styles.tokenInputWrap}>
+          <TextInput style={styles.tokenInput}
             placeholder="输入你的token"
             autoCapitalize='none'
             secureTextEntry={true}
@@ -221,11 +221,16 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: '#999'
   },
-  tokenInput: {
+  tokenInputWrap: {
     paddingLeft:10,
     marginBottom:10,
     paddingRight:10,
-    backgroundColor: '#fff'
+  },
+  tokenInput: {
+    height: 40,
+    borderWidth: 1,
+    borderColor: '#26b064',
+    borderRadius: 8,
   },
   tagWrap: {
     backgroundColor: '#fff',
@@ -234,7 +239,7 @@ const styles = StyleSheet.create({
   tagTitle: {
     color: '#333',
     fontSize: 14,
-    padding: 10
+    margin: 10
   },
   tagWrapper: {
     justifyContent: 'center',
