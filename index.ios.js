@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 
 var Md5 = require('./lib/md5');
+var Alert = require('./lib/components/Alert');
 md5Util = new Md5();
 
 class PassToken extends Component {
@@ -44,6 +45,16 @@ class PassToken extends Component {
         this.state.siteKey = siteKey;
         // this.setState({siteKey: siteKey})
         //为啥使用setState下次点击才能看到上次siteKey的值
+    }
+
+    if (this.state.siteKey == null) {
+        this.refs.Alert.alert('亲，没有选择网站哦');
+        return;
+    }
+
+    if (this.state.text == '') {
+        this.refs.Alert.alert('亲，忘填写token了');
+        return;
     }
 
     var siteKey = this.state.siteKey || '';
@@ -118,8 +129,9 @@ class PassToken extends Component {
                 <Text style={styles.desc}>不再担心网站被脱库、撞库</Text>
             </View>
         </View>
-        <View style={styles.tokenInput}>
-          <TextInput style={{height: 40}}
+        <Alert ref="Alert" />
+        <View style={styles.tokenInputWrap}>
+          <TextInput style={styles.tokenInput}
             placeholder="输入你的token"
             autoCapitalize='none'
             secureTextEntry={true}
@@ -173,7 +185,7 @@ class PassToken extends Component {
 
 
         <View style={styles.passwordWrapper}>
-            <Text style={styles.passwordText}>您的密码:{this.state.password}</Text>
+                <Text >您的密码:{this.state.password}</Text>
         </View>
 
         <View style={styles.buttonWrapper}>
@@ -202,7 +214,6 @@ const styles = StyleSheet.create({
   container: {
     paddingLeft: 10,
     paddingRight: 10,
-    marginTop: 50,
     flex: 1,
     backgroundColor: '#F5FCFF',
   },
@@ -221,11 +232,16 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: '#999'
   },
-  tokenInput: {
+  tokenInputWrap: {
     paddingLeft:10,
     marginBottom:10,
     paddingRight:10,
-    backgroundColor: '#fff'
+  },
+  tokenInput: {
+    height: 40,
+    borderWidth: 1,
+    borderColor: '#26b064',
+    borderRadius: 8,
   },
   tagWrap: {
     backgroundColor: '#fff',
@@ -234,21 +250,20 @@ const styles = StyleSheet.create({
   tagTitle: {
     color: '#333',
     fontSize: 14,
-    padding: 10
+    margin: 10
   },
   tagWrapper: {
     justifyContent: 'center',
-    flex: 1,
     flexDirection: 'row',
   },
   tag: {
+    flex: 1,
     margin: 10,
     width: 80,
     padding:6,
     paddingLeft: 12,
     paddingRight:12,
     borderRadius: 5,
-    justifyContent:'center',
     backgroundColor: '#ddd',
   },
   tagText: {
@@ -277,14 +292,17 @@ const styles = StyleSheet.create({
   },
   passwordWrapper: {
     marginBottom: 10,
-    backgroundColor: '#fff',
-    justifyContent: 'center'
-  },
-  passwordText: {
-    paddingTop:18,
     paddingLeft: 10,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
     height: 60,
-  }
+  },
 });
+
+/* Text 在android下不支持paddingTop */
+
+/*
+    水平居中和垂直居中请给View设置alignItems(水平居中)和justifyContent(垂直居中)
+ */
 
 AppRegistry.registerComponent('PassToken', () => PassToken);

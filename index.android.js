@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 
 var Md5 = require('./lib/md5');
+var Alert = require('./lib/components/Alert');
 md5Util = new Md5();
 
 class PassToken extends Component {
@@ -44,6 +45,16 @@ class PassToken extends Component {
         this.state.siteKey = siteKey;
         // this.setState({siteKey: siteKey})
         //为啥使用setState下次点击才能看到上次siteKey的值
+    }
+
+    if (this.state.siteKey == null) {
+        this.refs.Alert.alert('亲，没有选择网站哦');
+        return;
+    }
+
+    if (this.state.text == '') {
+        this.refs.Alert.alert('亲，忘填写token了');
+        return;
     }
 
     var siteKey = this.state.siteKey || '';
@@ -118,6 +129,7 @@ class PassToken extends Component {
                 <Text style={styles.desc}>不再担心网站被脱库、撞库</Text>
             </View>
         </View>
+        <Alert ref="Alert" />
         <View style={styles.tokenInputWrap}>
           <TextInput style={styles.tokenInput}
             placeholder="输入你的token"
