@@ -212,8 +212,6 @@ class PassToken extends Component {
  */
 const styles = StyleSheet.create({
   container: {
-    paddingLeft: 10,
-    paddingRight: 10,
     flex: 1,
     backgroundColor: '#F5FCFF',
   },
@@ -224,13 +222,16 @@ const styles = StyleSheet.create({
     color: '#333'
   },
   descWrapper: {
+    paddingBottom: 10,
     marginBottom: 20,
+    backgroundColor: '#337ab7',
+    backgroundColor: '#26b064',
   },
   desc: {
     textAlign: 'center',
     fontSize: 14,
     marginTop: 10,
-    color: '#999'
+    color: '#fff',
   },
   tokenInputWrap: {
     paddingLeft:10,
@@ -274,7 +275,8 @@ const styles = StyleSheet.create({
 
 
   buttonWrapper: {
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 20
   },
   button: {
     padding:6,
